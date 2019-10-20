@@ -108,7 +108,8 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(occupancymap_node
      src/occupancymap.cpp
-     src/occupancymap_node.cpp)
+     src/occupancymap_node.cpp
+     src/properties.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

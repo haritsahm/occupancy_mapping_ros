@@ -12,10 +12,7 @@
 #include <nav_msgs/MapMetaData.h>
 
 #include <eigen3/Eigen/Eigen>
-
-typedef std::pair<double,double> Point2D;
-inline double x (Point2D &p){return p.first;}
-inline double y (Point2D &p){return p.second;}
+#include "properties.h"
 
 class OccupancyMap
 {
@@ -31,17 +28,19 @@ public:
   void laserScanSubs(const sensor_msgs::LaserScanConstPtr &msg);
   void imuSubs(const sensor_msgs::ImuConstPtr &msg);
   void jointStateSubs(const sensor_msgs::JointStateConstPtr &msg);
+
   double inverseSensorModel();
   std::vector<Point2D> bresenhamLineP(Point2D start, Point2D end);
   std::vector<int> bresenhamLine(Point2D start, Point2D end);
+  Point2D getLaserPos(int &index, double &dist);
 
 
-  int toIndex(MatrixXd map, Point2D p){return y(p)*map.rows()+x(p);}
+  int toIndex(MatrixXd map, Point2D p){return (int)p.y*map.cols()+p.x;}
   Point2D fromIndex(MatrixXd map, int index)
   {
       Point2D cell;
-      cell.first = (int)(index / map.cols());
-      cell.second = index % map.cols();
+      cell.x = index % map.cols();
+      cell.y = (int)floor(index / map.cols());
       return cell;
   }
 
@@ -56,6 +55,9 @@ private:
 
   tf::TransformListener base_listener;
   tf::TransformListener scan_listener;
+  tf::TransformListener listener;
+
+  Eigen::Affine3d base_, scanner, laser_ref;
 
 
   // map

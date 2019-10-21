@@ -12,6 +12,9 @@
 #include <nav_msgs/MapMetaData.h>
 
 #include <eigen3/Eigen/Eigen>
+#include <mutex>
+#include <math.h>
+#include <pthread.h>
 #include "properties.h"
 
 class OccupancyMap
@@ -45,6 +48,13 @@ public:
       return cell;
   }
 
+  double clip(double val, double upper=1, double lower=0)
+  {
+      if(val > upper) return upper;
+      if(val < lower) return lower;
+      return val;
+  }
+
 
 private:
   ros::NodeHandle nh_;
@@ -60,6 +70,8 @@ private:
 
   Eigen::Affine3d base_, scanner, laser_ref;
 
+  std::mutex mutex_;
+  bool get_laser;
 
   // map
   int map_width, map_height;

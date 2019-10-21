@@ -3,52 +3,55 @@ Panels:
     Help Height: 75
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options1
-        - /Status1
-        - /Grid1
-        - /Grid1/Offset1
-        - /Map1
-        - /Map1/Status1
-        - /Map1/Position1
-        - /Map1/Orientation1
-        - /RobotModel1/Links1
-        - /TF1
-        - /LaserScan1
-      Splitter Ratio: 0.507204592
-    Tree Height: 835
+      Expanded: ~
+      Splitter Ratio: 0.5
+    Tree Height: 846
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
   Class: ""
   Displays:
-    - Alpha: 0.5
-      Cell Size: 0.00999999978
-      Class: rviz/Grid
-      Color: 160; 160; 164
+    - Class: rviz/TF
       Enabled: true
-      Line Style:
-        Line Width: 0.0299999993
-        Value: Lines
-      Name: Grid
-      Normal Cell Count: 0
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Plane: XY
-      Plane Cell Count: 1000
-      Reference Frame: <Fixed Frame>
-      Value: true
-    - Alpha: 1
-      Class: rviz/Map
-      Color Scheme: map
-      Draw Behind: false
-      Enabled: true
-      Name: Map
-      Topic: /map_data
-      Unreliable: false
-      Use Timestamp: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        base_scan:
+          Value: true
+        caster_back_link:
+          Value: true
+        imu_link:
+          Value: true
+        odom:
+          Value: true
+        wheel_left_link:
+          Value: true
+        wheel_right_link:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          base_footprint:
+            base_link:
+              base_scan:
+                {}
+              caster_back_link:
+                {}
+              imu_link:
+                {}
+              wheel_left_link:
+                {}
+              wheel_right_link:
+                {}
+      Update Interval: 0
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
@@ -99,47 +102,33 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Class: rviz/TF
+    - Alpha: 0.5
+      Cell Size: 0.100000001
+      Class: rviz/Grid
+      Color: 160; 160; 164
       Enabled: true
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-        base_footprint:
-          Value: true
-        base_link:
-          Value: true
-        base_scan:
-          Value: true
-        caster_back_link:
-          Value: true
-        imu_link:
-          Value: true
-        odom:
-          Value: true
-        wheel_left_link:
-          Value: true
-        wheel_right_link:
-          Value: true
-      Marker Scale: 1
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        odom:
-          base_footprint:
-            base_link:
-              base_scan:
-                {}
-              caster_back_link:
-                {}
-              imu_link:
-                {}
-              wheel_left_link:
-                {}
-              wheel_right_link:
-                {}
-      Update Interval: 0
+      Line Style:
+        Line Width: 0.0299999993
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 250000
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.699999988
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map_data
+      Unreliable: false
+      Use Timestamp: false
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -179,39 +168,39 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz/MoveCamera
     - Class: rviz/FocusCamera
+    - Class: rviz/MoveCamera
   Value: true
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.47213435
+      Distance: 24.3712978
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.384770393
-        Y: -1.59757757
-        Z: 0.0533578396
+        X: 0.00892496109
+        Y: 0.0293922424
+        Z: 0.00714850426
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.254796237
+      Pitch: 0.294796854
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.81958127
+      Yaw: 5.49819231
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1053
+  Height: 1056
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000010000000000000171000003d2fc0200000001fb000000100044006900730070006c006100790073010000002b000003d2000000da00ffffff000005c0000003d200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 1847
-  X: 73
-  Y: 27
+  QMainWindow State: 000000ff00000000fd00000001000000000000016a000003dafc0200000001fb000000100044006900730070006c0061007900730100000028000003da000000d700ffffff000005cf000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1855
+  X: 65
+  Y: 24

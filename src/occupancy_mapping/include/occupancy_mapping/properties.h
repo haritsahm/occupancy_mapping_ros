@@ -4,6 +4,8 @@
 #include <eigen3/Eigen/Eigen>
 #include <math.h>
 #include <vector>
+#include <iostream>
+#include <ostream>
 
 struct Point2D
 {
@@ -26,6 +28,10 @@ struct Point2D
     inline Point2D& operator/=(const double scalar){	x/=scalar;y/=scalar; return *this;}
     inline Point2D& operator+=(const Point2D& v){	x+=v.x; y+=v.y; return *this;}
     inline Point2D& operator-=(const Point2D& v){	x-=v.x; y-=v.y; return *this;}
+    inline Point2D& round(){x=std::round(x); y = std::round(y); return *this;}
+
+    friend std::ostream& operator<<(std::ostream& os, const Point2D& dt){
+        os << "(" <<dt.x << ',' << dt.y << ')';return os;}
 };
 
 Eigen::Matrix3d getRotationX(double angle);

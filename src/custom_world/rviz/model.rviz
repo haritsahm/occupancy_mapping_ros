@@ -14,8 +14,9 @@ Panels:
         - /Map1/Orientation1
         - /RobotModel1/Links1
         - /TF1
+        - /LaserScan1
       Splitter Ratio: 0.507204592
-    Tree Height: 846
+    Tree Height: 835
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -150,22 +151,22 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/LaserScan
       Color: 255; 255; 255
-      Color Transformer: ""
+      Color Transformer: Intensity
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 4096
+      Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: LaserScan
-      Position Transformer: ""
+      Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.00999999978
       Style: Flat Squares
-      Topic: ""
+      Topic: /scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -184,7 +185,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 16.099205
+      Distance: 3.47213435
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -199,18 +200,18 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.854795992
+      Pitch: 0.254796237
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.92957902
+      Yaw: 3.81958127
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1056
+  Height: 1053
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000016a000003dafc0200000001fb000000100044006900730070006c0061007900730100000028000003da000000d700ffffff000005cf000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 1855
-  X: 65
-  Y: 24
+  QMainWindow State: 000000ff00000000fd000000010000000000000171000003d2fc0200000001fb000000100044006900730070006c006100790073010000002b000003d2000000da00ffffff000005c0000003d200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1847
+  X: 73
+  Y: 27

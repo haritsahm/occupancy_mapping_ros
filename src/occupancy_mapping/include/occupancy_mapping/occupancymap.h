@@ -29,11 +29,12 @@ public:
   void imuSubs(const sensor_msgs::ImuConstPtr &msg);
   void jointStateSubs(const sensor_msgs::JointStateConstPtr &msg);
 
-  double inverseSensorModel();
+  void updateMap();
   std::vector<Point2D> bresenhamLineP(Point2D start, Point2D end);
   std::vector<int> bresenhamLine(Point2D start, Point2D end);
   Point2D getLaserPos(int &index, double &dist);
-
+  double updateCell(bool occ);
+  double loggOddRatio(bool occ);
 
   int toIndex(MatrixXd map, Point2D p){return (int)p.y*map.cols()+p.x;}
   Point2D fromIndex(MatrixXd map, int index)
@@ -63,8 +64,14 @@ private:
   // map
   int map_width, map_height;
   double map_res;
-  Eigen::MatrixXd map;
+  Eigen::MatrixXd map, logs_map;
+  std::vector<double> map_v, logs_map_v;
   Point2D map_center;
+  double lo;
+  bool data_updated;
+
+  nav_msgs::OccupancyGrid oGrid;
+  geometry_msgs::Pose origin;
 
 };
 

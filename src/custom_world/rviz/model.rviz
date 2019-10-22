@@ -3,9 +3,12 @@ Panels:
     Help Height: 75
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /Global Options1
+        - /Map1
+        - /Map1/Orientation1
       Splitter Ratio: 0.5
-    Tree Height: 846
+    Tree Height: 835
 Toolbars:
   toolButtonStyle: 2
 Visualization Manager:
@@ -106,7 +109,7 @@ Visualization Manager:
       Cell Size: 0.100000001
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.0299999993
         Value: Lines
@@ -119,7 +122,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 250000
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 0.699999988
       Class: rviz/Map
       Color Scheme: map
@@ -145,9 +148,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 0
+      Max Intensity: 2.53381309e-37
       Min Color: 0; 0; 0
-      Min Intensity: 0
+      Min Intensity: 2.53381309e-37
       Name: LaserScan
       Position Transformer: XYZ
       Queue Size: 10
@@ -174,33 +177,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 24.3712978
+      Distance: 42.4391632
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.00892496109
-        Y: 0.0293922424
-        Z: 0.00714850426
+        X: 0.181757927
+        Y: -1.85418224
+        Z: 0.0721201897
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.294796854
+      Pitch: 0.961923242
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.49819231
+      Yaw: 2.69071174
     Saved: ~
 Window Geometry:
   Displays:
-    collapsed: false
-  Height: 1056
-  Hide Left Dock: false
+    collapsed: true
+  Height: 1021
+  Hide Left Dock: true
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000016a000003dafc0200000001fb000000100044006900730070006c0061007900730100000028000003da000000d700ffffff000005cf000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 1855
-  X: 65
-  Y: 24
+  QMainWindow State: 000000ff00000000fd000000010000000000000171000003d2fc0200000001fb000000100044006900730070006c006100790073000000002b000003d2000000da00ffffff0000039c000003b200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 924
+  X: 996
+  Y: 27

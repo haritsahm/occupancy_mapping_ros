@@ -36,7 +36,7 @@ public:
   std::vector<Point2D> bresenhamLineP(Point2D start, Point2D end);
   std::vector<int> bresenhamLine(Point2D start, Point2D end);
   Point2D getLaserPos(int &index, double &dist);
-  double updateCell(bool occ);
+  double ProbLog(double x);
   double loggOddRatio(bool occ);
 
   int toIndex(MatrixXd map, Point2D p){return (int)p.y*map.cols()+p.x;}

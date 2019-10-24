@@ -3,6 +3,8 @@
   <param name="map_width" value="500" type="int"/>
   <param name="map_height" value="500" type="int"/>
   <param name="map_res" value="0.1" type="double"/>
+  <param name="occ_value" value="0.7" type="double"/>
+
 
   <node pkg="occupancy_mapping" type="occupancymap_node" name="occupancymap_node"  output="screen"></node>
 

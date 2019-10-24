@@ -14,6 +14,5 @@ int main(int argc, char **argv)
   ros::Subscriber joint_subs_ = nh.subscribe("/joint_states", 10, &OccupancyMap::jointStateSubs, &map_);
 
   map_.loop();
-
   return 0;
 }

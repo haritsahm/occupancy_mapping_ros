@@ -16,6 +16,7 @@
 #include <math.h>
 #include <pthread.h>
 #include "properties.h"
+#include <boost/thread.hpp>
 
 class OccupancyMap
 {
@@ -79,7 +80,7 @@ private:
   Eigen::MatrixXd map, logs_map;
   std::vector<double> map_v, logs_map_v;
   Point2D map_center;
-  double lo;
+  double lo, l_occ, l_free;
   bool data_updated;
 
   nav_msgs::OccupancyGrid oGrid;

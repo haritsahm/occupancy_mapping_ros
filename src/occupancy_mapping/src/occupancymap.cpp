@@ -43,6 +43,8 @@ OccupancyMap::OccupancyMap(ros::NodeHandle &nh)
     oGrid.info.height = map.rows();
     oGrid.info.origin = origin;
     oGrid.info.resolution = map_res;
+
+//    boost::thread mapper = boost::thread(boost::bind(&OccupancyMap::updateMap, this));
 }
 
 void OccupancyMap::laserScanSubs(const sensor_msgs::LaserScanConstPtr &msg)
@@ -182,81 +184,83 @@ double OccupancyMap::loggOddRatio(bool occ)
 
 void OccupancyMap::updateMap()
 {
+//    while(ros::ok())
+//    {
+        mutex_.lock();
+        bool hit;
 
-    mutex_.lock();
-    bool hit;
-
-    //sensor Pos w.r.t odom
-    Eigen::Vector3d laser_pos = scanner.translation();
-    Eigen::Vector3d laser_pos_m = laser_pos*10; laser_pos_m.array().floor();
-    Eigen::Vector3d laser_rpy = convertRotationToRPY(scanner.linear());
-
-
-    double c = cos(laser_rpy.z());
-    double s = sin(laser_rpy.z());
-
-    for(int index=0; index < laser_data.ranges.size(); index++)
-    {
-        hit = true;
-        double dist = laser_data.ranges[index];
-
-        if(std::isinf(dist) || dist > laser_data.range_max)
-        {
-            int a=rand()%2;
-            dist = a == 0  ? laser_data.range_min+0.2 : laser_data.range_max/2;
-            hit = false;
-        }
-        else if(std::isnan(dist) || dist < laser_data.range_min)
-            continue;
+        //sensor Pos w.r.t odom
+        Eigen::Vector3d laser_pos = scanner.translation();
+        Eigen::Vector3d laser_pos_m = laser_pos*10; laser_pos_m.array().floor();
+        Eigen::Vector3d laser_rpy = convertRotationToRPY(scanner.linear());
 
 
+        double c = cos(laser_rpy.z());
+        double s = sin(laser_rpy.z());
 
-        Point2D l_pos = getLaserPos(index, dist); //respect to laser_base
+//        if(laser_data.ranges.size()>0)
+//        {
 
-        Point2D l_pos_w; //laser w.r.t odom
-        l_pos_w.x= c*l_pos.x -s*l_pos.y + laser_pos.x();
-        l_pos_w.y= s*l_pos.x +c*l_pos.y + laser_pos.y();
+            for(int index=0; index < laser_data.ranges.size(); index++)
+            {
+                hit = true;
+                double dist = laser_data.ranges[index];
 
-        l_pos_w*=10;
+                if(std::isinf(dist) || dist > laser_data.range_max)
+                {
+                    int a=rand()%2;
+                    dist = a == 0  ? laser_data.range_min+0.2 : laser_data.range_max-0.3;
+                    hit = false;
+                }
+                else if(std::isnan(dist) || dist < laser_data.range_min)
+                    continue;
 
-        Point2D l_pos_w_map(map_center.x + l_pos_w.x, map_center.y-l_pos_w.y);
-        Point2D r_pos_w_map(map_center.x + laser_pos_m.x(), map_center.y-laser_pos_m.y());
 
-        std::vector<Point2D> map_point = bresenhamLineP(r_pos_w_map, l_pos_w_map);
 
-        Point2D m_hit;
-        if(hit)
-        {
-            m_hit = map_point[map_point.size()-1];
-            map_point.pop_back();
-        }
+                Point2D l_pos = getLaserPos(index, dist); //respect to laser_base
 
-        for(auto &p: map_point)
-        {
-            int px = (int)floor(p.x); int py = (int)floor(p.y);
-            map(py,px)=clip(map(py,px) + l_free - lo);
-        }
+                Point2D l_pos_w; //laser w.r.t odom
+                l_pos_w.x= c*l_pos.x -s*l_pos.y + laser_pos.x();
+                l_pos_w.y= s*l_pos.x +c*l_pos.y + laser_pos.y();
 
-        if(hit)
-        {
-            int px = (int)floor(m_hit.x); int py = (int)floor(m_hit.y);
-            map(py,px) = clip(map(py,px) + l_occ - lo);
-        }
-    }
+                l_pos_w*=10;
 
-    data_updated = true;
+                Point2D l_pos_w_map(map_center.x + l_pos_w.x, map_center.y-l_pos_w.y);
+                Point2D r_pos_w_map(map_center.x + laser_pos_m.x(), map_center.y-laser_pos_m.y());
 
-    mutex_.unlock();
+                std::vector<Point2D> map_point = bresenhamLineP(r_pos_w_map, l_pos_w_map);
 
+                Point2D m_hit;
+                if(hit)
+                {
+                    m_hit = map_point[map_point.size()-1];
+                    map_point.pop_back();
+                }
+
+                for(auto &p: map_point)
+                {
+                    int px = (int)floor(p.x); int py = (int)floor(p.y);
+                    map(py,px)=clip(map(py,px) + l_free - lo);
+                }
+
+                if(hit)
+                {
+                    int px = (int)floor(m_hit.x); int py = (int)floor(m_hit.y);
+                    map(py,px) = clip(map(py,px) + l_occ - lo);
+                }
+            }
+
+            data_updated = true;
+//        }
+
+        mutex_.unlock();
+//    }
 
 }
 
 void OccupancyMap::loop()
 {
     ros::Rate r(60);
-
-    //    boost::thread p(&OccupancyMap::updateMap, this);
-
 
     while(ros::ok())
     {
@@ -297,8 +301,6 @@ void OccupancyMap::loop()
         ros::spinOnce();
         r.sleep();
     }
-
-    //    p.join();
 
     ros::shutdown();
 

@@ -1,4 +1,4 @@
-# occupanc_mapping_rosaOccupancy Grid Mapping - Mobile Robot Laser
+# Occupancy Grid Mapping - Mobile Robot Laser
 ---
 
 This is my implementation on occupancy grid mapping from laser data using TurtleBo3 Burger in Gazebo
